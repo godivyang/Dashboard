@@ -58,8 +58,8 @@ export default function Home() {
             &nbsp;{sideBarExpand && "Dashboard"}
           </span>
           <span className="mt-4 w-fit"/>
-          {apps.map(app => {
-            return <Button className="flex items-center w-full text-left font-bold justify-between" variant="outline" title={app.name} onClick={() => navigateTo(app.route)}>
+          {apps.map((app,i) => {
+            return <Button className="flex items-center w-full text-left font-bold justify-between" variant="outline" title={app.name} onClick={() => navigateTo(app.route)} key={"Sidebar-button-"+i}>
               {icons[app.icon]} {sideBarExpand && app.name}
             </Button>
           })}
