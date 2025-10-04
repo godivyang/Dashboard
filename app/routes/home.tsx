@@ -1,4 +1,4 @@
-import { Apple, ArrowLeftFromLine, ArrowRightFromLine, BoomBox, HandCoins, LayoutDashboard, Moon, Sun, TypeOutline, User } from "lucide-react";
+import { Apple, ArrowLeftFromLine, ArrowRightFromLine, BoomBox, HandCoins, LayoutDashboard, Menu, Moon, Sun, TypeOutline, User } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { Outlet } from "react-router";
@@ -51,8 +51,9 @@ export default function Home() {
     };
 
     return <div className="h-full w-full flex">
-        
-        <aside className="w-fit flex flex-col p-1 pl-0 gap-1 bg-background">
+        <div className={`${sideBarExpand ? "w-full h-full" : "hidden"} bg-secondary/90 z-10 fixed left-0 md:w-0 md:h-0`} onClick={() => setSideBarExpand(false)}>
+        </div>
+        <aside className={`w-fit h-full p-1 pl-0 gap-1 bg-background flex-col ${sideBarExpand ? "flex fixed top-0 left-0" : "hidden"} md:static md:flex z-20`}>
           <span className="flex p-2 font-bold text-2xl items-center justify-between text-blue-500 cursor-pointer" onClick={() => navigateTo("")}>
             <LayoutDashboard/>
             &nbsp;{sideBarExpand && "Dashboard"}
@@ -72,7 +73,10 @@ export default function Home() {
             {sideBarExpand ? <ArrowLeftFromLine/> : <ArrowRightFromLine/>}
           </Button>
         </aside>
-        <div className="flex flex-1 w-max">
+        <div className="flex flex-1 flex-col w-max">
+        <Button className="md:hidden flex h-fit w-fit shadow-sm" variant="outline" onClick={() => setSideBarExpand(true)}>
+          <Menu/>
+        </Button>
         <Outlet />
         </div>
     </div>;
